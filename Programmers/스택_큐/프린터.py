@@ -17,3 +17,27 @@ def solution(priorities, location):
         # pop data is max value
         priorities.pop(priorities.index(max(priorities)))
         itr+=1
+
+def solution2(priorities, location):
+    answer = 0
+    while (True):
+        answer += 1
+        max_prior_value = max(priorities)
+        max_prior_idx = priorities.index(max_prior_value)
+
+        if max_prior_idx == location:
+            break
+        elif location < max_prior_idx:
+            location = len(priorities) + location - max_prior_idx - 1
+        elif location > max_prior_idx:
+            location = location - max_prior_idx - 1
+
+        if max_prior_idx == len(priorities) - 1:
+            priorities = priorities[:max_prior_idx]
+        else:
+            priorities = priorities[max_prior_idx + 1:] + priorities[:max_prior_idx]
+
+    return answer
+
+if __name__ == '__main__':
+    solution([2, 1, 3, 2], 2)
